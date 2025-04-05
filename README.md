@@ -6,13 +6,4 @@ My personal website — [eightharsh.com](https://eightharsh.com) — where I wri
 
 ## ⚙️ Stack
 
-- Next.js, Tailwind CSS, TypeScript, MDX  
-- Upstash Redis, Vercel, Cloudflare
-
-## 🚀 Setup
-
-```bash
-git clone https://github.com/eightharsh/eightharsh.com.git
-cd eightharsh.com
-bun install
-bun dev
+- Next.js, Tailwind CSS, TypeScript, MDX ,vercel
