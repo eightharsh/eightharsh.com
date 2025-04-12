@@ -3,52 +3,61 @@ import { ScrambleText } from "@/components/scramble-text"
 
 export default function NowPage() {
   return (
-    <main className="animate-fade-in-up">
-      <h1 className="text-4xl font-bold mb-8 text-white">
+    <main className="animate-fade-in-up relative">
+      <h1 className="text-4xl font-bold mb-4 text-white">
         <span className="text-accent mr-2">*</span>
         <ScrambleText text="now" />
       </h1>
 
-      <p className="text-gray-400 mb-12 leading-relaxed">
-        a small snapshot of what i’m doing, learning, and focusing on right now. updated occasionally to keep things fresh and intentional.
-      </p>
+      <p className="text-sm text-gray-400 mb-8">last updated: April 2025</p>
 
-      <div className="space-y-12">
-        <section className="bg-[#111] border border-neutral-800 rounded-2xl p-6">
-          <p className="text-xl mb-4 text-gray-300">
-            🚀 <strong className="text-white">Currently diving into:</strong><br />
-            Next.js, TypeScript, and serverless architecture. I'm building something to automate my daily workflows and get more time back for deep work.
-          </p>
-          <p className="text-lg text-gray-400">
-            📚 <strong className="text-white">What I’m learning:</strong><br />
-            Exploring NLP using TensorFlow, Hugging Face, and OpenAI APIs to build smarter tools.
-          </p>
+      <div className="space-y-8 text-gray-400 leading-relaxed text-base">
+        <section>
+          <h2 className="text-white text-lg font-semibold mb-2">🎯 focus</h2>
+          <ul className="list-disc list-inside space-y-1">
+            <li>building mini tools with Next.js + serverless</li>
+            <li>experimenting with automation workflows</li>
+          </ul>
         </section>
 
-        <section className="bg-[#111] border border-neutral-800 rounded-2xl p-6">
-          <p className="text-xl mb-4 text-gray-300">
-            🎯 <strong className="text-white">Goals for this week:</strong><br />
-            Ship my next mini-project — a side app to boost productivity. Also polishing React optimization and UI/UX techniques.
-          </p>
-          <p className="text-lg text-gray-400">
-            🌍 <strong className="text-white">Living in:</strong><br />
-            India — but collaborating globally. Exploring remote roles and international teamwork.
-          </p>
+        <section>
+          <h2 className="text-white text-lg font-semibold mb-2">📚 learning</h2>
+          <ul className="list-disc list-inside space-y-1">
+            <li>natural language processing & prompt engineering</li>
+            <li>design systems + animation principles</li>
+          </ul>
         </section>
 
-        <section className="bg-[#111] border border-neutral-800 rounded-2xl p-6">
-          <p className="text-xl mb-4 text-gray-300">
-            ✨ <strong className="text-white">What excites me right now:</strong><br />
-            The pace of AI in software dev is mind-blowing. I'm keeping up with breakthroughs and carving out my space in it.
-          </p>
-          <p className="text-lg text-gray-400">
-            💭 <strong className="text-white">Mental state:</strong><br />
-            Constant loop of building, breaking, refining. Energized and overwhelmed — but focused and hopeful.
-          </p>
+        <section>
+          <h2 className="text-white text-lg font-semibold mb-2">🛠 side projects</h2>
+          <ul className="list-disc list-inside space-y-1">
+            <li>productivity tracker with AI suggestions</li>
+            <li>blog redesign with MDX + Redis full-text search</li>
+          </ul>
         </section>
 
-        <section className="text-sm italic text-gray-500 text-right">
-          Last updated: <span className="text-white">April 2025</span>
+        <section>
+          <h2 className="text-white text-lg font-semibold mb-2">🌱 life</h2>
+          <ul className="list-disc list-inside space-y-1">
+            <li>living in India, working async with a global crew</li>
+            <li>daily deep work + walks to stay sane</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-white text-lg font-semibold mb-2">🤯 inspired by</h2>
+          <ul className="list-disc list-inside space-y-1">
+            <li>new GPT-5 demos</li>
+            <li>indie hackers shipping real things</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-white text-lg font-semibold mb-2">💭 mental state</h2>
+          <ul className="list-disc list-inside space-y-1">
+            <li>calm, curious, caffeinated</li>
+            <li>shifting between building, breaking, and refining</li>
+          </ul>
         </section>
       </div>
     </main>
