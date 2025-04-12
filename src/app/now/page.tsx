@@ -2,8 +2,10 @@ import { Metadata } from "next"
 import { ScrambleText } from "@/components/scramble-text"
 
 export default function NowPage() {
-  // Get the deployment date from environment variable
-  const deployDate = process.env.NEXT_PUBLIC_DEPLOY_DATE || new Date().toLocaleDateString();
+  // Get the deployment date from environment variable and format it to "Month Day, Year"
+  const deployDate = process.env.NEXT_PUBLIC_DEPLOY_DATE
+    ? new Date(process.env.NEXT_PUBLIC_DEPLOY_DATE).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+    : new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
   return (
     <main className="animate-fade-in-up relative">
