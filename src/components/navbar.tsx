@@ -8,7 +8,6 @@ export function Navbar() {
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      // Don't trigger if any input elements are focused or if event target is an input
       if (
         document.activeElement?.tagName === "INPUT" ||
         document.activeElement?.tagName === "TEXTAREA" ||
@@ -26,6 +25,9 @@ export function Navbar() {
           break
         case "p":
           router.push("/projects")
+          break
+        case "n":
+          router.push("/now")
           break
       }
     }
@@ -55,6 +57,12 @@ export function Navbar() {
           className="hover:text-accent transition-colors duration-200"
         >
           [p] projects
+        </Link>
+        <Link
+          href="/now"
+          className="hover:text-accent transition-colors duration-200"
+        >
+          [n] now
         </Link>
       </div>
     </nav>
