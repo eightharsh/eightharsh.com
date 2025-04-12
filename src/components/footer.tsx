@@ -9,9 +9,9 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="mt-16 border-t border-neutral-800 pt-8 text-sm text-gray-500">
+    <footer className="mt-16 border-t border-neutral-800 pt-8 text-sm">
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-left">&copy; {new Date().getFullYear()} eightharsh</p>
+        <p>&copy; {new Date().getFullYear()} eightharsh</p>
         <div className="flex gap-4 flex-wrap">
           {links.map((link) => (
             <Link
