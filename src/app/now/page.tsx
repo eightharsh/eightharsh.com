@@ -1,7 +1,5 @@
 import { Metadata } from "next"
 import { ScrambleText } from "@/components/scramble-text"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
 
 export default function NowPage() {
   return (
