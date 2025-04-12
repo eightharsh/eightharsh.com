@@ -53,7 +53,7 @@ export default function RootLayout({
         <div className="max-w-4xl mx-auto px-4 py-8">
           <Navbar />
           {children}
-          <Footer /> {/* The footer appears at the bottom */}
+          <Footer /> 
         </div>
       </body>
     </html>
