@@ -68,7 +68,7 @@ export default async function Post({ params }: PageProps) {
             url: `https://eightharsh.com/blog/${post.slug}`,
             author: {
               "@type": "Person",
-              name: "Harsh Raj Kumar",
+              name: "Harsh",
             },
           }),
         }}
