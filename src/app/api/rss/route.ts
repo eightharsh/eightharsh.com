@@ -1,68 +1,69 @@
-import { NextResponse } from 'next/server';
-import RSS from 'rss';
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import { NextResponse } from "next/server";
+import path from "path";
+import fs from "fs";
+import matter from "gray-matter"; // To parse frontmatter from MDX files
 
-// Function to parse MDX files and return metadata and content
-export async function parseMDX(filePath: string) {
-  const fileContent = fs.readFileSync(filePath, 'utf-8');
-  const { data, content } = matter(fileContent);
-  return {
-    title: data.title,
-    description: data.description,
-    slug: path.basename(filePath, '.mdx'), // Use the file name as the slug
-    date: data.date,
-    content: content, // Actual content (to be included in content:encoded)
-  };
-}
+// Helper function to format date to RFC-822
+const formatDate = (date: Date) => {
+  return date.toUTCString();
+};
 
-// API Route to generate RSS feed
+// Fetch the list of posts from your "posts" directory
+const getPosts = () => {
+  const postsDirectory = path.join(process.cwd(), "posts");
+  const filenames = fs.readdirSync(postsDirectory);
+
+  const posts = filenames.map((filename) => {
+    const filePath = path.join(postsDirectory, filename);
+
+    // Read the file content and parse the frontmatter (metadata)
+    const fileContent = fs.readFileSync(filePath, "utf8");
+    const { data } = matter(fileContent); // Extract frontmatter
+
+    return {
+      title: data.title || "Untitled",
+      link: `https://www.eightharsh.com/blog/${filename.replace(".mdx", "")}`,
+      pubDate: formatDate(new Date(data.date || Date.now())), // Default to now if no date exists
+      description: data.description || "No description available",
+    };
+  });
+
+  return posts;
+};
+
 export async function GET() {
-  const feed = new RSS({
-    title: 'eightharsh\'s blog RSS Feed',
-    description: 'eightharsh\'s blog RSS Feed',
-    feed_url: 'https://www.eightharsh.com/rss',
-    site_url: 'https://www.eightharsh.com',
-    language: 'en',
-    lastBuildDate: new Date(),
-  });
+  const posts = getPosts();
+  const rssFeed = `
+  <?xml version="1.0" encoding="UTF-8"?>
+  <rss version="2.0">
+    <channel>
+      <title>eightharsh's blog RSS Feed</title>
+      <description>eightharsh's blog RSS Feed</description>
+      <link>https://www.eightharsh.com</link>
+      <generator>RSS for Bun</generator>
+      <lastBuildDate>${formatDate(new Date())}</lastBuildDate>
+      <language>en</language>
+      ${posts
+        .map(
+          (post) => `
+          <item>
+            <title><![CDATA[${post.title}]]></title>
+            <link>${post.link}</link>
+            <guid isPermaLink="false">${post.link}</guid>
+            <pubDate>${post.pubDate}</pubDate>
+            <description><![CDATA[${post.description}]]></description>
+          </item>
+        `
+        )
+        .join("")}
+    </channel>
+  </rss>
+  `;
 
-  // Read posts directory and get the list of MDX files
-  const postsDirectory = path.join(process.cwd(), 'posts');
-  const postFiles = fs.readdirSync(postsDirectory);
-
-  // Parse each MDX file
-  const posts = await Promise.all(
-    postFiles.map(async (file) => {
-      const postPath = path.join(postsDirectory, file);
-      return await parseMDX(postPath);
-    })
-  );
-
-  // Add each post to the RSS feed
-  posts.forEach((post) => {
-    feed.item({
-      title: post.title,
-      description: post.description,
-      url: `https://www.eightharsh.com/blog/${post.slug}`,
-      date: new Date(post.date),
-      guid: `https://www.eightharsh.com/blog/${post.slug}`,
-      content: `
-        <![CDATA[
-        <p>${post.content}</p>
-        <p><a href="https://www.eightharsh.com/blog/${post.slug}">Read the full post</a></p>
-        ]]>
-      `, // Ensure that content is wrapped in CDATA
-    });
-  });
-
-  // Return the RSS XML with correct headers
-  return NextResponse.json(feed.xml(), {
+  return new NextResponse(rssFeed, {
     headers: {
-      'Content-Type': 'application/xml', // Ensure the correct MIME type is set
+      "Content-Type": "application/rss+xml",
     },
   });
 }
-
 
