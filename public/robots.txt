@@ -1,0 +1,13 @@
+# robots.txt for https://eightharsh.com
+User-agent: *
+Disallow: /_next/
+Disallow: /api/
+
+# ── Public Sections ──
+Allow: /blog/
+Allow: /projects/
+Allow: /now/
+
+# Sitemap
+Sitemap: https://eightharsh.com/sitemap.xml
+
