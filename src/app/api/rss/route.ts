@@ -62,7 +62,7 @@ export async function GET() {
 
   return new NextResponse(rssFeed, {
     headers: {
-      "Content-Type": "application/rss+xml",
+      "Content-Type": "application/rss+xml", // Proper MIME type for RSS feeds
     },
   });
 }
