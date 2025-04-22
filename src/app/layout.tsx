@@ -1,14 +1,14 @@
-import type { Metadata } from "next"
-import { Geist_Mono } from "next/font/google"
-import "./globals.css"
-import { Navbar } from "../components/navbar"
-import { Analytics } from "@vercel/analytics/react"
+import type { Metadata } from "next";
+import { Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { Navbar } from "../components/navbar";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-geist-mono",
-})
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.eightharsh.com"),
@@ -16,10 +16,10 @@ export const metadata: Metadata = {
     default: "Harsh",
     template: "%s | Harsh",
   },
-  description: "Developer, student and maker of things.",
+  description: "Developer, student, and maker of things.",
   openGraph: {
     title: "Harsh",
-    description: "Developer, student and maker of things.",
+    description: "Developer, student, and maker of things.",
     url: "https://www.eightharsh.com",
     siteName: "eightharsh",
     locale: "en_US",
@@ -38,15 +38,26 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: "@eightharsh",
   },
-}
+  additionalLinks: [
+    {
+      rel: "alternate",
+      type: "application/rss+xml",
+      title: "RSS Feed",
+      href: "https://www.eightharsh.com/rss",
+    },
+  ],
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Next.js metadata links will automatically get injected here */}
+      </head>
       <body
         className={`${geistMono.variable} antialiased min-h-screen font-mono`}
       >
@@ -57,5 +68,8 @@ export default function RootLayout({
         <Analytics />
       </body>
     </html>
-  )
+  );
 }
+
+
+

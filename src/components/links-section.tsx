@@ -2,9 +2,10 @@ import Link from "next/link"
 
 const links = [
   { title: "email", href: "mailto:contact@eightharsh.com" },
-  { title: "x.com", href: "https://x.com/eightharsh" },
-  { title: "github", href: "https://github.com/eightharsh" },
-  { title: "linkedin", href: "https://www.linkedin.com/in/eightharsh" },
+  { title: "x.com", href: "https://x.com/eightharsh", external: true },
+  { title: "github", href: "https://github.com/eightharsh", external: true },
+  { title: "linkedin", href: "https://www.linkedin.com/in/eightharsh", external: true },
+  { title: "rss", href: "https://www.eightharsh.com/rss", external: true },
 ]
 
 export function LinksSection() {
@@ -19,6 +20,8 @@ export function LinksSection() {
             key={index}
             href={link.href}
             className="text-gray-400 hover:text-accent transition-colors duration-200"
+            target={link.external ? "_blank" : undefined}  
+            rel={link.external ? "noopener noreferrer" : undefined}
           >
             {link.title}
           </Link>
@@ -27,3 +30,5 @@ export function LinksSection() {
     </section>
   )
 }
+
+
