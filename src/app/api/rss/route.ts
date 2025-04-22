@@ -1,69 +1,64 @@
-import { NextResponse } from "next/server";
-import path from "path";
-import fs from "fs";
-import matter from "gray-matter"; // To parse frontmatter from MDX files
+import { NextResponse } from 'next/server';
+import path from 'path';
+import fs from 'fs';
+import { getAllPosts } from '../../lib/blog';  // Assuming you have a utility to fetch all posts
 
-// Helper function to format date to RFC-822
-const formatDate = (date: Date) => {
-  return date.toUTCString();
-};
+// Helper to create the RSS XML structure
+function generateRSS(posts: any[]) {
+  const items = posts
+    .map((post) => {
+      return `
+        <item>
+          <title><![CDATA[${post.title}]]></title>
+          <description><![CDATA[${post.description}]]></description>
+          <link>https://www.eightharsh.com/blog/${post.slug}</link>
+          <guid isPermaLink="false">https://www.eightharsh.com/blog/${post.slug}</guid>
+          <pubDate>${new Date(post.date).toUTCString()}</pubDate>
+        </item>
+      `;
+    })
+    .join('');
 
-// Fetch the list of posts from your "posts" directory
-const getPosts = () => {
-  const postsDirectory = path.join(process.cwd(), "posts");
+  const rss = `<?xml version="1.0" encoding="UTF-8"?>
+  <rss version="2.0">
+    <channel>
+      <title>Harsh's Blog RSS Feed</title>
+      <description>Latest blog posts from Harsh's blog</description>
+      <link>https://www.eightharsh.com</link>
+      <generator>Next.js</generator>
+      <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+      <atom:link href="https://www.eightharsh.com/rss" rel="self" type="application/rss+xml"/>
+      <language>en</language>
+      ${items}
+    </channel>
+  </rss>`;
+
+  return rss;
+}
+
+// Handle the RSS feed request
+export async function GET() {
+  // Fetch the list of blog posts dynamically (this should be adapted to your setup)
+  const postsDirectory = path.join(process.cwd(), 'posts');
   const filenames = fs.readdirSync(postsDirectory);
 
   const posts = filenames.map((filename) => {
     const filePath = path.join(postsDirectory, filename);
-
-    // Read the file content and parse the frontmatter (metadata)
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    const { data } = matter(fileContent); // Extract frontmatter
+    const content = fs.readFileSync(filePath, 'utf-8');
+    const { title, description, date } = JSON.parse(content); // Assuming each post has JSON metadata
 
     return {
-      title: data.title || "Untitled",
-      link: `https://www.eightharsh.com/blog/${filename.replace(".mdx", "")}`,
-      pubDate: formatDate(new Date(data.date || Date.now())), // Default to now if no date exists
-      description: data.description || "No description available",
+      title,
+      description,
+      slug: filename.replace('.mdx', ''),
+      date,
     };
   });
 
-  return posts;
-};
+  // Generate the RSS XML
+  const rss = generateRSS(posts);
 
-export async function GET() {
-  const posts = getPosts();
-  const rssFeed = `
-  <?xml version="1.0" encoding="UTF-8"?>
-  <rss version="2.0">
-    <channel>
-      <title>eightharsh's blog RSS Feed</title>
-      <description>eightharsh's blog RSS Feed</description>
-      <link>https://www.eightharsh.com</link>
-      <generator>RSS for Bun</generator>
-      <lastBuildDate>${formatDate(new Date())}</lastBuildDate>
-      <language>en</language>
-      ${posts
-        .map(
-          (post) => `
-          <item>
-            <title><![CDATA[${post.title}]]></title>
-            <link>${post.link}</link>
-            <guid isPermaLink="false">${post.link}</guid>
-            <pubDate>${post.pubDate}</pubDate>
-            <description><![CDATA[${post.description}]]></description>
-          </item>
-        `
-        )
-        .join("")}
-    </channel>
-  </rss>
-  `;
-
-  return new NextResponse(rssFeed, {
-    headers: {
-      "Content-Type": "application/rss+xml", // Proper MIME type for RSS feeds
-    },
-  });
+  // Return the RSS feed as plain text
+  return NextResponse.json(rss, { headers: { 'Content-Type': 'application/rss+xml' } });
 }
 

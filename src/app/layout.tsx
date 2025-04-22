@@ -56,7 +56,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Next.js metadata links will automatically get injected here */}
+        {/* Automatically injected by Next.js */}
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body
         className={`${geistMono.variable} antialiased min-h-screen font-mono`}
@@ -70,6 +72,5 @@ export default function RootLayout({
     </html>
   );
 }
-
 
 
