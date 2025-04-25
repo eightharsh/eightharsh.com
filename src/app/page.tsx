@@ -24,8 +24,10 @@ export default function HomePage() {
       />
       <BlogSection />
       <LinksSection />
-      <footer className="text-sm text-gray-500 py-6 flex justify-start mt-12">
-        <p>© 2025 eightharsh.com · MIT License · Open Source · <span className="text-gray-500">Chase the Unthinkable</span></p>
+      <footer className="text-sm text-gray-500 py-6 flex flex-col sm:flex-row sm:justify-between items-center mt-12">
+        <p className="text-center sm:text-left">
+          © 2025 eightharsh · <span className="text-gray-500">Chase the Unthinkable</span>
+        </p>
       </footer>
     </>
   )
