@@ -38,14 +38,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: "@eightharsh",
   },
-  additionalLinks: [
-    {
-      rel: "alternate",
-      type: "application/rss+xml",
-      title: "RSS Feed",
-      href: "https://www.eightharsh.com/rss",
-    },
-  ],
+
+  
 };
 
 export default function RootLayout({

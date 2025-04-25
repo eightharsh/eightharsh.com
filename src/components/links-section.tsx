@@ -5,7 +5,6 @@ const links = [
   { title: "x.com", href: "https://x.com/eightharsh", external: true },
   { title: "github", href: "https://github.com/eightharsh", external: true },
   { title: "linkedin", href: "https://www.linkedin.com/in/eightharsh", external: true },
-  { title: "rss", href: "https://www.eightharsh.com/rss", external: true },
 ]
 
 export function LinksSection() {
