@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "../components/navbar";
 import { Analytics } from "@vercel/analytics/react";
 
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
+// Font setup with Latin-extended support and fallback
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin", "latin-ext"],
   display: "swap",
-  variable: "--font-geist-mono",
+  variable: "--font-plex-mono",
+  weight: "400",
+  style: "normal",
+  fallback: ["monospace"],
 });
 
 export const metadata: Metadata = {
@@ -24,7 +28,7 @@ export const metadata: Metadata = {
     siteName: "eightharsh",
     locale: "en_US",
     type: "website",
-    images: ["https://www.eightharsh.com/og/home"],
+    images: ["https://www.eightharsh.com/og/home"], 
   },
   robots: {
     index: true,
@@ -38,8 +42,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: "@eightharsh",
   },
-
-  
 };
 
 export default function RootLayout({
@@ -48,15 +50,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        {/* Automatically injected by Next.js */}
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
-      <body
-        className={`${geistMono.variable} antialiased min-h-screen font-mono`}
-      >
+    <html lang="en" className={plexMono.variable}>
+      <body className="antialiased min-h-screen font-mono">
         <div className="max-w-4xl mx-auto px-4 py-8">
           <Navbar />
           {children}
@@ -66,5 +61,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-

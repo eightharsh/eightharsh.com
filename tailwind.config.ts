@@ -1,5 +1,5 @@
-import type { Config } from "tailwindcss"
-import typography from "@tailwindcss/typography"
+import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
 export default {
   content: [
@@ -10,14 +10,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ["var(--font-geist-mono)"],
+        mono: ["var(--font-plex-mono)", "monospace"], 
       },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        accent: "#ff6b35",
+        background: "var(--background)", 
+        foreground: "var(--foreground)", 
+        accent: "#ff6b35", 
       },
     },
   },
   plugins: [typography()],
-} satisfies Config
+} satisfies Config;
