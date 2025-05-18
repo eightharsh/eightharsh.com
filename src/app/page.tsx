@@ -3,6 +3,18 @@ import { Item, SectionList } from "@/components/section-list"
 import { BlogSection } from "@/components/blog-section"
 import { LinksSection } from "@/components/links-section"
 
+
+const workItems: Item[] = [
+  {
+    title: "Open Source Contributor",
+    role: "Self-Employed",
+    period: "Feb 2023 – Present",
+    description:
+      "Actively contributing to open-source projects with a focus on building meaningful, community-driven software and continuous learning through collaboration.",
+    href: "https://github.com/eightharsh",
+  },
+];
+
 const projectItems = [
   {
     title: "nothing",
@@ -10,7 +22,8 @@ const projectItems = [
     description: "nothing",
     href: "https://github.com/eightharsh",
   },
-]
+];
+
 
 export default function HomePage() {
   return (
