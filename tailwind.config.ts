@@ -10,12 +10,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ["var(--font-plex-mono)", "monospace"], 
+        mono: ["var(--font-geist-mono)"],
       },
       colors: {
-        background: "var(--background)", 
-        foreground: "var(--foreground)", 
-        accent: "#ff6b35", 
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        accent: "#ff6b35",
       },
     },
   },
