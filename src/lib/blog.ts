@@ -78,3 +78,13 @@ function getMDXData(dir: string): MDXFileData[] {
     }
   })
 }
+
+// --- Progress Report Functions ---
+
+export function getProgressReports(): MDXFileData[] {
+  return getMDXData(path.join(process.cwd(), "posts/progress-reports"))
+}
+
+export function getProgressReportBySlug(slug: string): MDXFileData | null {
+  return getProgressReports().find((post) => post.slug === slug) ?? null
+}

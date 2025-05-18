@@ -27,7 +27,7 @@ export function Navbar() {
           router.push("/projects")
           break
         case "n":
-          router.push("/now")
+          router.push("/progress-reports")
           break
       }
     }
@@ -59,10 +59,10 @@ export function Navbar() {
           [p] projects
         </Link>
         <Link
-          href="/now"
+          href="/progress-reports"
           className="hover:text-accent transition-colors duration-200"
         >
-          [n] now
+          [r] progress-reports
         </Link>
       </div>
     </nav>
