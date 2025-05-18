@@ -12,7 +12,7 @@ const workItems: Item[] = [
     description:
       "Actively contributing to open-source projects with a focus on building meaningful, community-driven software and continuous learning through collaboration.",
     href: "https://github.com/eightharsh",
-  },
+  }
 ];
 
 const projectItems = [
@@ -29,6 +29,7 @@ export default function HomePage() {
   return (
     <>
       <Header />
+      <SectionList title="work" items={workItems} />
       <SectionList
         title="projects"
         items={projectItems}
