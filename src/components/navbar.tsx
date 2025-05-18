@@ -26,7 +26,7 @@ export function Navbar() {
         case "p":
           router.push("/projects")
           break
-        case "n":
+        case "r":
           router.push("/progress-reports")
           break
       }
